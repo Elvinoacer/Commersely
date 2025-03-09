@@ -80,6 +80,8 @@ export const useProductStore = create<ProductState>((set, get) => ({
           },
         }
       );
+
+      console.log(response);
       set({ isLoading: false });
       return response.data;
     } catch (e) {

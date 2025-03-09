@@ -153,7 +153,7 @@ function SuperAdminManageProductPage() {
 
     const result = isEditMode
       ? await updateProduct(getCurrentEditedProductId, formData)
-      : await createProduct(formData);
+      : (await createProduct(formData)) || "Nothing for real";
     console.log(result, "result");
     if (result) {
       router.push("/super-admin/products/list");

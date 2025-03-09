@@ -11,10 +11,18 @@ function generateToken(userId: string, email: string, role: string) {
       email,
       role,
     },
-    process.env.JWT_SECRET!,
+    process.env.JWT_ACCESS_SECRET!,
     { expiresIn: "60m" }
   );
-  const refreshToken = uuidv4();
+  const refreshToken = jwt.sign(
+    {
+      userId,
+      email,
+      role,
+    },
+    process.env.JWT_REFRESH_SECRET!,
+    { expiresIn: "7d" }
+  );
   return { accessToken, refreshToken };
 }
 
@@ -71,19 +79,21 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 };
 
 export const login = async (req: Request, res: Response): Promise<void> => {
+  // console.log("We are logging you in", req);
   try {
     const { email, password } = req.body;
     const extractCurrentUser = await prisma.user.findUnique({
       where: { email },
     });
 
+    // console.log(extractCurrentUser);
     if (
       !extractCurrentUser ||
       !(await bcrypt.compare(password, extractCurrentUser.password))
     ) {
       res.status(401).json({
         success: false,
-        error: "Invalied credentials",
+        error: "Invalid credentials",
       });
 
       return;
@@ -118,6 +128,7 @@ export const refreshAccessToken = async (
   res: Response
 ): Promise<void> => {
   const refreshToken = req.cookies.refreshToken;
+  console.log(refreshToken);
   if (!refreshToken) {
     res.status(401).json({
       success: false,

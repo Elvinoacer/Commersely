@@ -5,9 +5,11 @@ import { v4 as uuidv4 } from "uuid";
 import { prisma } from "../server";
 
 const PAYPAL_CLIENT_ID =
-  "AYYtmQuBVHm_q4fO-nRv84xIKhQk1-BdhSLckYRxcBJLhxI5EcxafPKdkvKpqLDP-pNLNXalxvlUSgZE";
+  "AYNMZlbgLgaO2dSTBKQ2wgLQhrHXerBEACmVR_sbIeWhFju2nedD18GsEuV3cpY_QwOQ4Y7CSIM4rgeT"; //mine
+("AYYtmQuBVHm_q4fO-nRv84xIKhQk1-BdhSLckYRxcBJLhxI5EcxafPKdkvKpqLDP-pNLNXalxvlUSgZE");
 const PAYPAL_CLIENT_SECRET =
-  "EH6X0HMUA-0gB0Z1m8fq_p-YTy1dDLZT7Zs-Q8VcuX33xJN9RID883YWb38JSMwz88t2grJNwKR5ct_W";
+  "EAIAPpg-yl-KsLX5OEt6liCGPTTkPw6UovJDHF2OnrR4CBAAATIvexO_RFMW67z9CiMFBVFa4KUWtI25"; //mine
+("EH6X0HMUA-0gB0Z1m8fq_p-YTy1dDLZT7Zs-Q8VcuX33xJN9RID883YWb38JSMwz88t2grJNwKR5ct_W");
 
 async function getPaypalAccessToken() {
   const response = await axios.post(

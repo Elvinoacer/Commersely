@@ -118,7 +118,7 @@ function Header() {
                 className="w-full justify-start"
               >
                 <ShoppingBag className="mr-1 h-4 w-4" />
-                Cart (2)
+                Cart (1)
               </Button>
             </div>
           </div>

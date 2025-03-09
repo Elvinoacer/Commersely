@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
     try {
       const { payload } = await jwtVerify(
         accessToken,
-        new TextEncoder().encode(process.env.JWT_SECRET)
+        new TextEncoder().encode(process.env.JWT_ACCESS_SECRET)
       );
       const { role } = payload as {
         role: string;

@@ -51,6 +51,10 @@ function LoginPage() {
       const user = useAuthStore.getState().user;
       if (user?.role === "SUPER_ADMIN") router.push("/super-admin");
       else router.push("/home");
+    } else {
+      toast({
+        title: "Unauthorized request",
+      });
     }
   };
   return (

@@ -22,7 +22,10 @@ export const authenticateJwt = (
     return;
   }
 
-  jwtVerify(accessToken, new TextEncoder().encode(process.env.JWT_SECRET))
+  jwtVerify(
+    accessToken,
+    new TextEncoder().encode(process.env.JWT_ACCESS_SECRET)
+  )
     .then((res) => {
       const payload = res.payload as JWTPayload & {
         userId: string;
@@ -35,6 +38,7 @@ export const authenticateJwt = (
         email: payload.email,
         role: payload.role,
       };
+
       next();
     })
     .catch((e) => {
@@ -51,13 +55,12 @@ export const isSuperAdmin = (
   next: NextFunction
 ) => {
   if (req.user && req.user.role === "SUPER_ADMIN") {
+    console.log("Youre a super admin");
     next();
   } else {
-    res
-      .status(403)
-      .json({
-        success: false,
-        error: "Access denied! Super admin access required",
-      });
+    res.status(403).json({
+      success: false,
+      error: "Access denied! Super admin access required",
+    });
   }
 };

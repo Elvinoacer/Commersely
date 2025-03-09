@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Toast } from "@/components/ui/toast";
 import { useToast } from "@/hooks/use-toast";
 import { useProductStore } from "@/store/useProductStore";
 import { useSettingsStore } from "@/store/useSettingsStore";
@@ -73,6 +74,8 @@ function SuperAdminCouponsPage() {
       if (result) {
         setuploadedFiles([]);
         fetchBanners();
+      } else {
+        alert("Uploaded files failed");
       }
     }
 

@@ -24,6 +24,7 @@ export const addToCart = async (
       create: { userId },
       update: {},
     });
+    console.log("Your cartItem buddy", { productId, quantity, size, color });
 
     const cartItem = await prisma.cartItem.upsert({
       where: {
@@ -85,6 +86,8 @@ export const getCart = async (
   try {
     const userId = req.user?.userId;
 
+    console.log(userId, "user id" + userId);
+
     if (!userId) {
       res.status(401).json({
         success: false,
@@ -100,6 +103,8 @@ export const getCart = async (
         items: true,
       },
     });
+
+    console.log("Your cart", cart);
 
     if (!cart) {
       res.json({
@@ -134,6 +139,8 @@ export const getCart = async (
         };
       })
     );
+
+    console.log("Cart with PRODUCTS", cartItemsWithProducts);
 
     res.json({
       success: true,

@@ -34,6 +34,7 @@ function ProductDetailsContent({ id }: { id: string }) {
   }, [id, getProductById, router]);
 
   const handleAddToCart = () => {
+    console.log("///prduct", product);
     if (product) {
       addToCart({
         productId: product.id,

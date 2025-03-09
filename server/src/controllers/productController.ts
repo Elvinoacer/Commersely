@@ -26,6 +26,8 @@ export const createProduct = async (
     const files = req.files as Express.Multer.File[];
 
     //upload all images to cloudinary
+
+    console.log("Uploading to the cloud");
     const uploadPromises = files.map((file) =>
       cloudinary.uploader.upload(file.path, {
         folder: "ecommerce",
@@ -56,7 +58,9 @@ export const createProduct = async (
     files.forEach((file) => fs.unlinkSync(file.path));
     res.status(201).json(newlyCreatedProduct);
   } catch (e) {
-    console.error(e);
+    console.log("but failed ");
+
+    console.error(e, "YOO ELVIN");
     res.status(500).json({ success: false, message: "Some error occured!" });
   }
 };
